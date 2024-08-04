@@ -11,4 +11,12 @@ module.exports = {
       },
     ],
   ],
+  env: {
+    production: {
+      plugins: [
+        'react-native-paper/babel', 
+        '@iconscout/react-unicons/babel'
+      ],
+    },
+  },
 };
