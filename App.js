@@ -21,7 +21,6 @@ const App = () => {
   const appStyle = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: customTheme.colors.primary,
     }
   })
 
