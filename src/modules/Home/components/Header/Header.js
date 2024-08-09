@@ -1,29 +1,33 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {View, StyleSheet, Text, Keyboard, TextInput} from 'react-native';
-import { Button, Avatar, Searchbar, TouchableRipple, IconButton } from 'react-native-paper';
-import { useFonts, Roboto_400Regular } from '@expo-google-fonts/roboto';
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import React, {useEffect, useRef, useState} from 'react';
+import {View, StyleSheet, Text, Keyboard, TextInput, Modal} from 'react-native';
+import {
+  Button,
+  Avatar,
+  Searchbar,
+  TouchableRipple,
+  IconButton,
+} from 'react-native-paper';
+import {useFonts, Roboto_400Regular} from '@expo-google-fonts/roboto';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SearchPage from './components/Searchbar';
 
-const user = "Angelo Gatz"
-const currencyLabel = "US Dollar"
-const currencyValue = "200.000.000"
+const user = 'Angelo Gatz';
+const currencyLabel = 'US Dollar';
+const currencyValue = '200.000.000';
 
-const Header = ({ theme }) => {
+const Header = ({theme}) => {
 
-  const [ searchValue, setSearchValue] = useState(null)
+  const [isSearchPageVisible, setSearchPageVisible] = useState(false);
 
-  useEffect(() => {
-    removeInputFocus()
-  }, [Keyboard]);
+  const openSearchPage = () => {
+    setSearchPageVisible(true);
+  };
 
-  function removeInputFocus() {
-    Keyboard.addListener('keyboardWillHide', () => {
-      Keyboard.dismiss()
-    })
-  }
+  const closeSearchPage = () => {
+    setSearchPageVisible(false);
+  };
 
   const headerStyles = StyleSheet.create({
-
     container: {
       height: '100%',
       padding: 20,
@@ -41,34 +45,34 @@ const Header = ({ theme }) => {
     userContent: {
       flexDirection: 'row',
       alignItems: 'center',
-      color: theme.colors.secondary
+      color: theme.colors.secondary,
     },
     userName: {
       margin: 15,
       fontSize: 25,
       fontFamily: 'Roboto_400Regular',
       color: theme.colors.secondary,
-      fontWeight: '100'
+      fontWeight: '100',
     },
     currencyLabelContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
       top: 30,
-      right: -10
+      right: -10,
     },
     currencyLabelText: {
       fontSize: 18,
       color: theme.colors.secondary,
       fontWeight: '200',
       marginRight: -10,
-      marginLeft: -5
+      marginLeft: -5,
     },
     currencyValueText: {
       fontSize: 35,
       color: theme.colors.secondary,
       fontWeight: '600',
-      marginLeft: -5
+      marginLeft: -5,
     },
     searchBarContainer: {
       width: '80%',
@@ -80,7 +84,7 @@ const Header = ({ theme }) => {
     searchBar: {
       paddingVertical: 0,
       backgroundColor: 'transparent',
-      height: 45
+      height: 45,
     },
     currencyValueContainer: {
       flexDirection: 'row',
@@ -89,7 +93,7 @@ const Header = ({ theme }) => {
       top: 20,
     },
     touchRipple: {
-      color: theme.colors.secondary
+      color: theme.colors.secondary,
     },
   });
 
@@ -101,9 +105,7 @@ const Header = ({ theme }) => {
         size={20}
         onPress={() => console.log('Pressed')}
       />
-      <Text style={headerStyles.currencyLabelText}>
-        {currencyLabel}
-      </Text>
+      <Text style={headerStyles.currencyLabelText}>{currencyLabel}</Text>
       <IconButton
         icon="chevron-down"
         iconColor={theme.colors.secondary}
@@ -111,7 +113,7 @@ const Header = ({ theme }) => {
         onPress={() => console.log('Pressed')}
       />
     </>
-  )
+  );
 
   const currencyValueMaunt = (
     <>
@@ -121,20 +123,21 @@ const Header = ({ theme }) => {
         size={30}
         onPress={() => console.log('Pressed')}
       />
-      <Text style={headerStyles.currencyValueText}>
-        {currencyValue}
-      </Text>
+      <Text style={headerStyles.currencyValueText}>{currencyValue}</Text>
     </>
-  )
+  );
 
   const icon = (
     <TouchableRipple
-    onPress={() => Keyboard.dismiss()}
-    rippleColor="rgba(0, 0, 0, .32)"
-    >
-      <MaterialCommunityIcons name="magnify" size={30} style={headerStyles.touchRipple}/>
-    </TouchableRipple> 
-  )
+      onPress={openSearchPage}
+      rippleColor="rgba(0, 0, 0, .32)">
+      <MaterialCommunityIcons
+        name="magnify"
+        size={30}
+        style={headerStyles.touchRipple}
+      />
+    </TouchableRipple>
+  );
 
   return (
     <View style={headerStyles.container}>
@@ -142,23 +145,21 @@ const Header = ({ theme }) => {
         <View style={headerStyles.userImage}>
           <Avatar.Image
             size={45}
-            source={require('../../../assets/images/shane-stagner-z0u91lkc_Bw-unsplash.jpg')}
+            source={require('../../../../assets/images/shane-stagner-z0u91lkc_Bw-unsplash.jpg')}
           />
         </View>
         <View style={headerStyles.searchBarContainer}>
           <Searchbar
-            onChangeText={(e) => setSearchValue(e)}
-            value={searchValue}
             icon={() => icon}
             theme={theme.colors.secondary}
             inputStyle={{
               color: theme.colors.secondary,
               paddingVertical: 0,
               fontSize: 18,
-              marginTop: -5
+              marginTop: -5,
             }}
-            onClearIconPress={() => Keyboard.dismiss()}
             elevation={1}
+            onPress={openSearchPage}
             style={headerStyles.searchBar}
           />
         </View>
@@ -169,9 +170,16 @@ const Header = ({ theme }) => {
       <View style={headerStyles.currencyValueContainer}>
         {currencyValueMaunt}
       </View>
-    </View>
-  )
-};
 
+      <Modal
+        visible={isSearchPageVisible}
+        animationType="slide"
+        onRequestClose={closeSearchPage}
+      >
+        <SearchPage theme={theme} closeSearchPage={closeSearchPage} />
+      </Modal>
+    </View>
+  );
+};
 
 export default Header;
