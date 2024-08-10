@@ -5,7 +5,6 @@ import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Main() {
-  console.warn(DefaultTheme)
 
   const bkg = StyleSheet.create({
     backgroundImage: {

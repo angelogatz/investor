@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, StyleSheet, Text, Keyboard, TextInput, Modal} from 'react-native';
+import {View, StyleSheet, Text, Keyboard, Button, Modal, TouchableOpacity} from 'react-native';
 import {
-  Button,
   Avatar,
   Searchbar,
   TouchableRipple,
@@ -58,8 +57,8 @@ const Header = ({theme}) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      top: 30,
-      right: -10,
+      top: 10,
+      right: -5,
     },
     currencyLabelText: {
       fontSize: 18,
@@ -73,6 +72,12 @@ const Header = ({theme}) => {
       color: theme.colors.secondary,
       fontWeight: '600',
       marginLeft: -5,
+    },
+    addValueText: {
+      fontSize: 15,
+      color: theme.colors.secondary,
+      fontWeight: '600',
+      fontWeight: '300'
     },
     searchBarContainer: {
       width: '80%',
@@ -90,11 +95,39 @@ const Header = ({theme}) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      top: 20,
+      top: 0,
+    },
+    addValueContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      top: 0,
     },
     touchRipple: {
       color: theme.colors.secondary,
     },
+    button: {
+      elevation: 8,
+      backgroundColor: "transparent",
+      borderColor: "#ff0000",
+      borderWidth: 2,
+      borderColor: theme.colors.secondary,
+      borderRadius: 30,
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+      width: 250,
+      left: 57,
+      top: 14
+    },
+    buttonText: {
+      fontSize: 18,
+      color: "#fff",
+      fontWeight: "bold",
+      alignSelf: "center",
+      textTransform: "uppercase",
+      fontSize: 15,
+      fontWeight: "300"
+    }
   });
 
   const currencyLabelMount = (
@@ -170,6 +203,13 @@ const Header = ({theme}) => {
       <View style={headerStyles.currencyValueContainer}>
         {currencyValueMaunt}
       </View>
+      <View style={headerStyles.addValueContainer}>
+        <Text style={headerStyles.addValueText}>Total disponível</Text>
+      </View>
+
+      <TouchableOpacity style={headerStyles.button}>
+        <Text style={headerStyles.buttonText}>Adicionar quantia</Text>
+      </TouchableOpacity>
 
       <Modal
         visible={isSearchPageVisible}

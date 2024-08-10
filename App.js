@@ -14,7 +14,8 @@ const App = () => {
       ...theme.colors,
       primary: 'rgba(49, 46, 255, 0.85)',
       secondary: '#e3f0ff',
-      tertiary: '#000000'
+      tertiary: '#000000',
+      otherWhite: '#f0f6fd'
     },
   };
   
