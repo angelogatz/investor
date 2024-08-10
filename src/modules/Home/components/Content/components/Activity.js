@@ -1,51 +1,76 @@
-import React, { Fragment } from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // Importa os ícones
+import React, {Fragment} from 'react';
+import {View, Text, FlatList, StyleSheet, Dimensions} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const data = [
-  { id: '1', type: 'register', amount: '4.000',title: 'Item 1', icon: 'clipboard-edit-outline' },
-  { id: '2', type: 'entry', amount: '1.000',title: 'Item 2', icon: 'cash-plus' },
-  { id: '3', type: 'spent', amount: '3.000',title: 'Item 3', icon: 'cash-minus' },
-  { id: '4', type: 'entry', amount: '600',title: 'Item 4', icon: 'cash-plus' },
-  { id: '5', type: 'register', amount: '410',title: 'Item 5', icon: 'clipboard-edit-outline' },
-  { id: '6', type: 'register', amount: '4,00',title: 'Item 6', icon: 'clipboard-edit-outline' },
-  { id: '7', type: 'spent', amount: '50',title: 'Item 7', icon: 'cash-minus' },
-  { id: '8', type: 'entry', amount: '737',title: 'Item 8', icon: 'cash-plus' },
-  { id: '9', type: 'register', amount: '100',title: 'Item 9', icon: 'clipboard-edit-outline' },
-  { id: '10', type: 'spent', amount: '1.200',title: 'Item 10', icon: 'cash-minus' },
+  {id: '1', type: 'register', amount: '4.000'},
+  {id: '2', type: 'entry', amount: '1.000'},
+  {id: '3', type: 'spent', amount: '3.000'},
+  {id: '4', type: 'entry', amount: '600'},
+  {id: '5', type: 'register', amount: '410'},
+  {id: '6', type: 'register', amount: '4,00'},
+  {id: '7', type: 'spent', amount: '50'},
+  {id: '8', type: 'entry', amount: '737'},
+  {id: '9', type: 'register', amount: '100'},
+  {id: '10', type: 'spent', amount: '1.200'},
 ];
 
-const getIconStyle = (type) => {
+const getIconStyle = type => {
   switch (type) {
     case 'entry':
-      return { color: '#0077ff', backgroundColor: '#cce0ff', textColor: '#4CAF50' }; // Azul e verde suave
+      return {
+        color: '#0077ff',
+        backgroundColor: '#cce0ff',
+        textColor: '#4CAF50',
+        label: 'Entrada',
+        icon: 'cash-plus',
+      };
     case 'spent':
-      return { color: '#f34d00', backgroundColor: '#f3b200', textColor: '#f28b82' }; // Laranja e vermelho suave
+      return {
+        color: '#f34d00',
+        backgroundColor: '#f3b200',
+        textColor: '#f28b82',
+        label: 'Saída',
+        icon: 'cash-minus',
+      };
     case 'register':
-      return { color: '#f39200', backgroundColor: '#f7b900', textColor: '#ce93d8' }; // Laranja e lilás suave
+      return {
+        color: '#f39200',
+        backgroundColor: '#f7b900',
+        textColor: '#ce93d8',
+        label: 'Cadastro',
+        icon: 'clipboard-edit-outline',
+      };
     default:
-      return { color: '#000', backgroundColor: '#fff', textColor: '#000' }; // Cor padrão
+      return {
+        color: '#000',
+        backgroundColor: '#fff',
+        textColor: '#000',
+        label: 'Movimentação',
+      };
   }
 };
 
-const Activity = ({ theme }) => {
-  const renderItem = ({ item }) => {
-    const { color, backgroundColor, textColor } = getIconStyle(item.type);
+const Activity = ({theme}) => {
+  const renderItem = ({item}) => {
+    const {color, backgroundColor, textColor, label, icon} = getIconStyle(
+      item.type,
+    );
     return (
       <Fragment>
         <View style={styles.itemWrapper}>
-          {/* Ícone do lado esquerdo */}
-          <View style={[styles.iconContainer, { backgroundColor }]}>
-            <Icon name={item.icon} size={24} color={color} />
+          <View style={[styles.iconContainer, {backgroundColor}]}>
+            <Icon name={icon} size={24} color={color} />
           </View>
           <View style={styles.itemContent}>
-            <Text style={styles.itemText}>{item.title}</Text>
+            <Text style={styles.itemText}>{label}</Text>
           </View>
-          {/* Contêiner de alinhamento à direita */}
           <View style={styles.rightContainer}>
             <View style={styles.amountWrapper}>
               <Icon name="currency-usd" size={18} color={textColor} />
-              <Text style={[styles.amountText, { color: textColor }]}>{item.amount}</Text>
+              <Text style={[styles.amountText, {color: textColor}]}>
+                {item.amount}
+              </Text>
             </View>
             <Icon name="chevron-right" size={24} color="#ccc" />
           </View>
@@ -58,60 +83,59 @@ const Activity = ({ theme }) => {
     container: {
       flex: 7,
       backgroundColor: theme.colors.secondary,
-      alignItems: 'center', // Centraliza os itens da lista
+      alignItems: 'center',
       paddingBottom: 20,
     },
     itemContainer: {
-      width: Dimensions.get('window').width * 0.9, // 90% da largura da tela
+      width: Dimensions.get('window').width * 0.9,
       padding: 25,
-      // Remove a curvatura dos cards
     },
     itemWrapper: {
-      flexDirection: 'row', // Alinha ícone e conteúdo horizontalmente
-      alignItems: 'center', // Alinha verticalmente
+      flexDirection: 'row',
+      alignItems: 'center',
       padding: 10,
     },
     wrapper: {
-      width: Dimensions.get('window').width * 0.9, // 90% da largura da tela
-      borderRadius: 15, // Adiciona curvatura ao container principal
-      backgroundColor: '#fff', // Fundo branco para a curvatura ser visível
-      overflow: 'hidden', // Garante que a curvatura afete todo o conteúdo
-      marginBottom: 90,
+      width: Dimensions.get('window').width * 0.9,
+      borderRadius: 15,
+      backgroundColor: '#fff',
+      overflow: 'hidden',
+      marginBottom: 70,
     },
     itemContent: {
-      flex: 1, // Ocupa o espaço restante para empurrar os itens da direita
+      flex: 1,
     },
     rightContainer: {
-      flexDirection: 'row', // Alinha o ícone de cifrão e o valor horizontalmente
+      flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'flex-end', // Alinha tudo à direita
+      justifyContent: 'flex-end',
     },
     amountWrapper: {
-      flexDirection: 'row', // Alinha o ícone de cifrão e o valor horizontalmente
+      flexDirection: 'row',
       alignItems: 'center',
-      marginRight: 10, // Espaçamento entre o valor e o chevron
+      marginRight: 10,
     },
     amountText: {
       fontSize: 16,
       marginLeft: 5,
     },
     chevronIcon: {
-      marginLeft: 10, // Espaçamento entre o valor e o chevron
+      marginLeft: 10,
     },
     itemText: {
       fontSize: 18,
     },
     divider: {
-      height: 0.5, // Define a altura do divisor
+      height: 0.5,
       backgroundColor: '#ddd',
-      width: Dimensions.get('window').width * 0.8, 
+      width: Dimensions.get('window').width * 0.8,
       alignSelf: 'center',
     },
     header: {
       fontSize: 24,
       fontWeight: 'bold',
       marginBottom: 10,
-      alignSelf: 'flex-start'
+      alignSelf: 'flex-start',
     },
     iconContainer: {
       width: 40,
@@ -138,6 +162,5 @@ const Activity = ({ theme }) => {
     </View>
   );
 };
-
 
 export default Activity;
