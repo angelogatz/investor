@@ -80,7 +80,7 @@ const Header = ({theme}) => {
       fontWeight: '300'
     },
     searchBarContainer: {
-      width: '80%',
+      width: '70%',
       borderRadius: 30,
       left: 18,
       borderWidth: 1,
@@ -127,6 +127,10 @@ const Header = ({theme}) => {
       textTransform: "uppercase",
       fontSize: 15,
       fontWeight: "300"
+    },
+    bell: {
+      backgroundColor: 'transparent',
+      left: 25
     }
   });
 
@@ -196,6 +200,13 @@ const Header = ({theme}) => {
             style={headerStyles.searchBar}
           />
         </View>
+        <TouchableOpacity>
+          <Avatar.Icon
+            size={40}
+            icon='bell'
+            style={headerStyles.bell}
+          />
+        </TouchableOpacity>
       </View>
       <View style={headerStyles.currencyLabelContainer}>
         {currencyLabelMount}
