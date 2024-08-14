@@ -5,8 +5,7 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          home: './src/modules/Home',
-          user: './src/modules/User',
+          modules: './src/modules',
           components: './src/components'
         },
       },

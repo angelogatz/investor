@@ -3,8 +3,8 @@ import { View, StyleSheet } from 'react-native'
 
 import { useRoute } from '@react-navigation/native';
 
-import Content from './components/Content/Content'
-import Header from './components/Header/Header'
+import { Content } from './components'
+import { Header } from './components'
 
 const Home = () => {
 

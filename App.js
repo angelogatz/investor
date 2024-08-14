@@ -1,14 +1,11 @@
 import React, { Fragment } from 'react'
 
-import Home from 'home/Home';
-import UserScreen from 'user/UserScreen';
-import { BottomSheet } from 'components';
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { useTheme } from 'react-native-paper';
-
 import { NavigationContainer } from '@react-navigation/native';
+
+import { BottomSheet } from 'components';
+import { Home, UserScreen } from 'modules'
 
 const Stack = createNativeStackNavigator();
 
