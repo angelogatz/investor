@@ -55,22 +55,22 @@ const BottomItem = ({id, name, value, theme, url, onChange}) => {
 
   return (
     <Fragment>
-      <TouchableOpacity onPress={() => onChange(value)}>
         <View style={bottomItemStyle.container} key={id}>
           <Card style={bottomItemStyle.cardsContainer}>
-            <Card.Title
-              left={() =>
-                bottomIcon({
-                  style: bottomItemStyle.bottomIcon,
-                  color: theme.colors.primary,
-                  icon: icon,
-                })
-              }
-            />
+            <TouchableOpacity onPress={() => onChange(value)}>
+              <Card.Title
+                left={() =>
+                  bottomIcon({
+                    style: bottomItemStyle.bottomIcon,
+                    color: theme.colors.primary,
+                    icon: icon,
+                  })
+                }
+              />
+            </TouchableOpacity>
             {active && <Text style={bottomItemStyle.dot}>.</Text>}
           </Card>
         </View>
-      </TouchableOpacity>
       <View></View>
     </Fragment>
   );

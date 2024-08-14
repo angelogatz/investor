@@ -7,6 +7,7 @@ module.exports = {
         alias: {
           home: './src/modules/Home',
           user: './src/modules/User',
+          components: './src/components'
         },
       },
     ],

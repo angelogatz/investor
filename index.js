@@ -19,7 +19,7 @@ export default function Main() {
         <ImageBackground
           source={require('./src/assets/images/backgroudStandard.jpg')}
           style={bkg.backgroundImage}
-        >
+          >
           <SafeAreaView  style={{ flex: 1, backgroundColor: '#312effd9'}}>
             <StatusBar translucent backgroundColor="transparent" />
             <App theme={DefaultTheme} />

@@ -93,14 +93,14 @@ const Activity = ({theme}) => {
     itemWrapper: {
       flexDirection: 'row',
       alignItems: 'center',
-      padding: 10,
+      padding: 15,
     },
     wrapper: {
       width: Dimensions.get('window').width * 0.9,
       borderRadius: 15,
       backgroundColor: '#fff',
       overflow: 'hidden',
-      marginBottom: 70,
+      marginBottom: 110,
     },
     itemContent: {
       flex: 1,

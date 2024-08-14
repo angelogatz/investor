@@ -1,9 +1,16 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import Content from 'home/components/Content/Content'
-import { useTheme } from 'react-native-paper';
-import Header from 'home/components/Header/Header';
+import React, { Fragment } from 'react'
 
+import Home from 'home/Home';
+import UserScreen from 'user/UserScreen';
+import { BottomSheet } from 'components';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { useTheme } from 'react-native-paper';
+
+import { NavigationContainer } from '@react-navigation/native';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   const theme = useTheme();
@@ -18,19 +25,34 @@ const App = () => {
       otherWhite: '#f0f6fd'
     },
   };
-  
-
-  const appStyle = StyleSheet.create({
-    container: {
-      flex: 1,
-    }
-  })
 
   return (
-    <View style={appStyle.container}>
-      <Header theme={customTheme}/>
-      <Content theme={customTheme}/>
-    </View>
+    <NavigationContainer
+      theme={{
+        colors: {
+          background: 'transparent',
+        },
+      }}
+    >
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen
+          name="/home"
+          component={Home}
+          initialParams={{ customTheme }}
+        />
+
+        <Stack.Screen 
+          name="/profile" 
+          component={UserScreen} 
+          initialParams={{ customTheme }}
+        />
+      </Stack.Navigator>
+      <BottomSheet theme={customTheme} />
+    </NavigationContainer>
   )
 }
 

@@ -6,7 +6,6 @@ import {
   TouchableRipple,
   IconButton,
 } from 'react-native-paper';
-import {useFonts, Roboto_400Regular} from '@expo-google-fonts/roboto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SearchPage from './components/Searchbar';
 
@@ -14,8 +13,7 @@ const user = 'Angelo Gatz';
 const currencyLabel = 'US Dollar';
 const currencyValue = '200.000.000';
 
-const Header = ({theme}) => {
-
+const Header = ({ theme }) => {
   const [isSearchPageVisible, setSearchPageVisible] = useState(false);
 
   const openSearchPage = () => {
@@ -31,6 +29,7 @@ const Header = ({theme}) => {
       height: '100%',
       padding: 20,
       flex: 1,
+      backgroundColor: 'transparent'
     },
     userImage: {
       borderColor: '#e3f0ff',
