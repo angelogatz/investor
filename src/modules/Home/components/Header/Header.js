@@ -8,13 +8,20 @@ import {
 } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SearchPage from './components/Searchbar';
+import { useGlobalContext } from '../../../../components/context/globalContext';
+import { useNavigation } from '@react-navigation/native';
 
 const user = 'Angelo Gatz';
 const currencyLabel = 'US Dollar';
 const currencyValue = '200.000.000';
 
-const Header = ({ theme, navigation }) => {
+const Header = () => {
+
   const [isSearchPageVisible, setSearchPageVisible] = useState(false);
+
+  const navigation = useNavigation();
+
+  const { theme, setScreen } = useGlobalContext();
 
   const openSearchPage = () => {
     setSearchPageVisible(true);
@@ -26,10 +33,10 @@ const Header = ({ theme, navigation }) => {
 
   const headerStyles = StyleSheet.create({
     container: {
-      height: '100%',
       padding: 20,
       flex: 1,
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      alignItems: 'center'
     },
     userImage: {
       borderColor: theme.colors.otherWhite,
@@ -39,6 +46,7 @@ const Header = ({ theme, navigation }) => {
       borderWidth: 2,
       borderColor: theme.colors.secondary,
       borderRadius: 50,
+      left: -4
     },
     userContent: {
       flexDirection: 'row',
@@ -57,7 +65,7 @@ const Header = ({ theme, navigation }) => {
       alignItems: 'center',
       justifyContent: 'center',
       top: 10,
-      right: -5,
+      right: 0,
     },
     currencyLabelText: {
       fontSize: 18,
@@ -70,7 +78,7 @@ const Header = ({ theme, navigation }) => {
       fontSize: 35,
       color: theme.colors.secondary,
       fontWeight: '600',
-      marginLeft: -5,
+      marginLeft: 0,
     },
     addValueText: {
       fontSize: 15,
@@ -79,9 +87,9 @@ const Header = ({ theme, navigation }) => {
       fontWeight: '300'
     },
     searchBarContainer: {
-      width: '70%',
+      width: '75%',
       borderRadius: 30,
-      left: 18,
+      left: 10,
       borderWidth: 1,
       borderColor: theme.colors.secondary,
     },
@@ -109,17 +117,15 @@ const Header = ({ theme, navigation }) => {
       elevation: 8,
       backgroundColor: "transparent",
       borderColor: "#ff0000",
-      borderWidth: 2,
+      borderWidth: 1,
       borderColor: theme.colors.secondary,
       borderRadius: 30,
-      paddingVertical: 10,
+      paddingVertical: 8,
       paddingHorizontal: 12,
-      width: 250,
-      left: 57,
-      top: 14
+      left: 0,
+      top: 15
     },
     buttonText: {
-      fontSize: 18,
       color: theme.colors.secondary,
       fontWeight: "bold",
       alignSelf: "center",
@@ -129,12 +135,13 @@ const Header = ({ theme, navigation }) => {
     },
     bell: {
       backgroundColor: 'transparent',
-      left: 25,
+      left: 13,
     }
   });
 
-  const handleChangeScreen = () => {
-    navigation.navigate('/profile')
+  const handleChangeScreen = (url) => {
+    setScreen(url);
+    navigation.navigate(url)
   }
 
   const currencyLabelMount = (
@@ -182,7 +189,7 @@ const Header = ({ theme, navigation }) => {
   return (
     <View style={headerStyles.container}>
       <View style={headerStyles.userContent}>
-        <TouchableOpacity style={headerStyles.userImage} onPress={() => handleChangeScreen()}>
+        <TouchableOpacity style={headerStyles.userImage} onPress={() => handleChangeScreen('/profile')}>
           <Avatar.Image
             size={45}
             source={require('../../../../assets/images/shane-stagner-z0u91lkc_Bw-unsplash.jpg')}
@@ -223,7 +230,7 @@ const Header = ({ theme, navigation }) => {
       </View>
 
       <TouchableOpacity style={headerStyles.button}>
-        <Text style={headerStyles.buttonText}>Adicionar quantia</Text>
+        <Text style={headerStyles.buttonText}>Adicionar</Text>
       </TouchableOpacity>
 
       <Modal

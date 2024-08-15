@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Avatar, Button, Card, Text, TouchableRipple} from 'react-native-paper';
+import { useGlobalContext } from '../../../../../components/context/globalContext';
 
 const firstIcon = props => (
   <Avatar.Icon {...props} size={44} color={props.color} icon="cash-plus" />
@@ -17,7 +18,10 @@ const thirdIcon = props => (
   />
 );
 
-const ActionCards = ({theme}) => {
+const ActionCards = () => {
+
+  const { theme } = useGlobalContext();
+
   const actionCardStyle = StyleSheet.create({
     container: {
       flex: 1,

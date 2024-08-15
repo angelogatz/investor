@@ -1,49 +1,46 @@
-import React, { Fragment, useState } from 'react'
-
+import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { NavigationContainer } from '@react-navigation/native';
 
 import { BottomSheet } from 'components';
 import { Home, UserScreen } from 'modules'
-import { darkTheme, lightTheme } from './src/Utils/themeConfig';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useGlobalContext } from './src/components/context/globalContext';
 
-const Stack = createNativeStackNavigator();
 
-const App = ({ isDarkTheme, setIsDarkTheme, theme }) => {
+const App = () => {
+
+  const Stack = createNativeStackNavigator();
+
+  const { isDarkMode } = useGlobalContext();
 
   return (
-    <NavigationContainer
-      theme={{
-        colors: {
-          background: 'transparent',
-        },
-      }}
-    >
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
+    <SafeAreaView  style={{ flex: 1, backgroundColor: isDarkMode ? '#a5a5a5a2' : '#312effd9'}}>
+      <NavigationContainer
+        theme={{
+          colors: {
+            background: 'transparent',
+          },
         }}
       >
-        <Stack.Screen
-          name="/home"
-          component={Home}
-          initialParams={{theme}}
-        />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen
+            name="/home"
+            component={Home}
+          />
 
-        <Stack.Screen 
-          name="/profile"
-          children={(props) => (
-            <UserScreen
-              {...props}
-              theme={theme}
-              onChangeTheme={() => setIsDarkTheme(!isDarkTheme)}
-            />
-          )}
-        />
-      </Stack.Navigator>
-      <BottomSheet theme={theme} />
-    </NavigationContainer>
+          <Stack.Screen 
+            name="/profile"
+            component={UserScreen}
+          />
+        </Stack.Navigator>
+        <BottomSheet />
+      </NavigationContainer>
+    </SafeAreaView>
   )
 }
 

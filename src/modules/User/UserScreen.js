@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native'
 import { Avatar, Card, Switch, Text } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useGlobalContext } from '../../components/context/globalContext';
 
 const data = [
   {id: '1', type: 'mode'},
@@ -14,10 +15,10 @@ const USER_MOCK_DATA = {
   phone: '+55(41) 9 8726-5268'
 }
 
-const UserScreen = ({ theme, onChangeTheme }) => {
-  
-  const [isEnabled, setIsEnabled] = useState(false);
+const UserScreen = () => {
 
+  const { theme, isDarkMode, setIsDarkMode } = useGlobalContext();
+  
   const getIconStyle = type => {
     switch (type) {
       case 'mode':
@@ -46,8 +47,7 @@ const UserScreen = ({ theme, onChangeTheme }) => {
   };
 
   function toggleSwitch() {
-    setIsEnabled(!isEnabled)
-    onChangeTheme(!isEnabled)
+    setIsDarkMode(!isDarkMode)
   }
 
   const renderItem = ({item}) => {
@@ -67,10 +67,10 @@ const UserScreen = ({ theme, onChangeTheme }) => {
             <View style={styles.rightContainer}>
               <Switch
                 trackColor={{false: '#9e9e9e', true: '#a5a5a5'}}
-                thumbColor={isEnabled ? '#575757' : '#f4f3f4'}
+                thumbColor={isDarkMode ? '#575757' : '#f4f3f4'}
                 ios_backgroundColor="#9e9e9e"
                 onValueChange={toggleSwitch}
-                value={isEnabled}
+                value={isDarkMode}
               />
             </View>
             :

@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import {View, Text, FlatList, StyleSheet, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useGlobalContext } from '../../../../../components/context/globalContext';
 
 const data = [
   {id: '1', type: 'register', amount: '4.000'},
@@ -51,7 +52,10 @@ const getIconStyle = type => {
   }
 };
 
-const Activity = ({theme}) => {
+const Activity = () => {
+
+  const { theme } = useGlobalContext();
+
   const renderItem = ({item}) => {
     const {color, backgroundColor, textColor, label, icon} = getIconStyle(
       item.type,

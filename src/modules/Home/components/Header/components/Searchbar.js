@@ -12,6 +12,7 @@ import {
 } from 'react-native-paper';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useGlobalContext } from '../../../../../components/context/globalContext';
 
 var items = [
   {
@@ -48,8 +49,10 @@ var items = [
   },
 ];
 
-const SearchPage = ({theme}) => {
+const SearchPage = () => {
   const [selectedItems, setSelectedItems] = useState([]);
+
+  const { theme } = useGlobalContext();
 
   useEffect(() => {
     removeInputFocus();

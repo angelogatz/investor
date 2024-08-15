@@ -1,31 +1,43 @@
 import React, {Fragment} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Avatar, Card} from 'react-native-paper';
+import { useGlobalContext } from '../../context/globalContext';
+import { useNavigation } from '@react-navigation/native';
 
 const bottomIcon = props => (
   <Avatar.Icon {...props} size={48} color={props.color} icon={props.icon} />
 );
 
-const BottomItem = ({id, name, value, theme, url, onChange}) => {
+const BottomItem = ({id, value}) => {
+
+  const navigation = useNavigation();
+
+  const { theme, setScreen, screen } = useGlobalContext();
+
   const getItemAttrs = value => {
     switch (value) {
       case 'home':
         return {
           icon: 'home',
-          active: Boolean(url === '/home'),
+          active: Boolean(screen === '/home'),
         };
       case 'activity':
         return {
           icon: 'check-network-outline',
-          active: Boolean(url === '/activity'),
+          active: Boolean(screen === '/activity'),
         };
       case 'profile':
         return {
           icon: 'human',
-          active: Boolean(url === '/profile'),
+          active: Boolean(screen === '/profile'),
         };
     }
   };
+
+  function screenSelection(url) {
+    setScreen(`/${url}`);
+    navigation.navigate(`/${url}`)
+  }
 
   const {active, icon} = getItemAttrs(value);
 
@@ -57,7 +69,7 @@ const BottomItem = ({id, name, value, theme, url, onChange}) => {
     <Fragment>
         <View style={bottomItemStyle.container} key={id}>
           <Card style={bottomItemStyle.cardsContainer}>
-            <TouchableOpacity onPress={() => onChange(value)}>
+            <TouchableOpacity onPress={() => screenSelection(value)}>
               <Card.Title
                 left={() =>
                   bottomIcon({

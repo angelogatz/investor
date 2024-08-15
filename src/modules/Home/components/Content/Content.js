@@ -2,8 +2,11 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import ActionCards from './components/ActionCards';
 import Activity from './components/Activity';
+import { useGlobalContext } from 'components/context/globalContext';
 
-const Content = ({ theme }) => {
+const Content = () => {
+
+  const { theme } = useGlobalContext();
 
   const contentStyles = StyleSheet.create({
     container: {

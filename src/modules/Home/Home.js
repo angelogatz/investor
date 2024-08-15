@@ -1,15 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
-
-import { useRoute } from '@react-navigation/native';
 
 import { Content } from './components'
 import { Header } from './components'
+import { useGlobalContext } from '../../components/context/globalContext'
 
-const Home = ({ navigation }) => {
+const Home = () => {
 
-  const route = useRoute();
-  const { theme } = route.params
+  const { theme } = useGlobalContext();
 
   const homeStyle = StyleSheet.create({
     container: {
@@ -19,7 +17,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={homeStyle.container}>
-      <Header theme={theme} navigation={navigation}/>
+      <Header theme={theme}/>
       <Content theme={theme}/>
     </View>
   )

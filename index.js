@@ -1,14 +1,13 @@
 import {AppRegistry, ImageBackground, StatusBar, StyleSheet} from 'react-native';
 import App from './App';
 import {name as appName} from './app.json';
-import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { darkTheme, lightTheme } from './src/Utils/themeConfig';
-import { useState } from 'react';
+import useGlobalContext from 'components/context/globalContext';
+import GlobalContextProvider from 'components/context/globalContext';
 
-export default function Main() {
 
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+export const Main = () => {
 
   const bkg = StyleSheet.create({
     backgroundImage: {
@@ -23,15 +22,9 @@ export default function Main() {
         <ImageBackground
           source={require('./src/assets/images/backgroudStandard.jpg')}
           style={bkg.backgroundImage}
-          >
-          <SafeAreaView  style={{ flex: 1, backgroundColor: isDarkTheme ? '#a5a5a5a2' : '#312effd9'}}>
-            <StatusBar translucent backgroundColor="transparent" />
-            <App 
-              theme={isDarkTheme ? darkTheme : lightTheme} 
-              setIsDarkTheme={setIsDarkTheme} 
-              isDarkTheme={isDarkTheme} 
-            />
-          </SafeAreaView>
+        >
+          <StatusBar translucent backgroundColor="transparent" />
+          <GlobalContextProvider><App/></GlobalContextProvider>
         </ImageBackground>
       </PaperProvider>
     </SafeAreaProvider>
