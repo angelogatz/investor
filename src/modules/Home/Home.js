@@ -6,10 +6,10 @@ import { useRoute } from '@react-navigation/native';
 import { Content } from './components'
 import { Header } from './components'
 
-const Home = () => {
+const Home = ({ navigation }) => {
 
   const route = useRoute();
-  const { customTheme } = route.params
+  const { theme } = route.params
 
   const homeStyle = StyleSheet.create({
     container: {
@@ -19,8 +19,8 @@ const Home = () => {
 
   return (
     <View style={homeStyle.container}>
-      <Header theme={customTheme}/>
-      <Content theme={customTheme}/>
+      <Header theme={theme} navigation={navigation}/>
+      <Content theme={theme}/>
     </View>
   )
 }

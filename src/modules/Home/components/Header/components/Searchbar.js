@@ -100,12 +100,12 @@ const SearchPage = ({theme}) => {
         itemStyle={{
           padding: 10,
           marginTop: 2,
-          backgroundColor: '#ddd',
-          borderColor: '#bbb',
+          backgroundColor: theme.colors.secondary,
+          borderColor: theme.colors.secondary,
           borderWidth: 1,
           borderRadius: 5,
         }}
-        itemTextStyle={{color: '#222'}}
+        itemTextStyle={{color: theme.colors.fontColor}}
         itemsContainerStyle={{maxHeight: 140}}
         items={items}
         defaultIndex={3}
@@ -116,7 +116,7 @@ const SearchPage = ({theme}) => {
           style: {
             padding: 12,
             borderWidth: 1,
-            borderColor: '#ccc',
+            borderColor: theme.colors.secondary,
             borderRadius: 5,
           },
         }}

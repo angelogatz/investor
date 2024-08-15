@@ -44,7 +44,7 @@ const getIconStyle = type => {
     default:
       return {
         color: '#000',
-        backgroundColor: '#fff',
+        backgroundColor: theme.colors.otherWhite,
         textColor: '#000',
         label: 'Movimentação',
       };
@@ -72,7 +72,7 @@ const Activity = ({theme}) => {
                 {item.amount}
               </Text>
             </View>
-            <Icon name="chevron-right" size={24} color="#ccc" />
+            <Icon name="chevron-right" size={24} color={theme.colors.fontColor}/>
           </View>
         </View>
       </Fragment>
@@ -98,7 +98,7 @@ const Activity = ({theme}) => {
     wrapper: {
       width: Dimensions.get('window').width * 0.9,
       borderRadius: 15,
-      backgroundColor: '#fff',
+      backgroundColor: theme.colors.otherWhite,
       overflow: 'hidden',
       marginBottom: 110,
     },
@@ -124,10 +124,11 @@ const Activity = ({theme}) => {
     },
     itemText: {
       fontSize: 18,
+      color: theme.colors.fontColor
     },
     divider: {
       height: 0.5,
-      backgroundColor: '#ddd',
+      backgroundColor: theme.colors.fontColor,
       width: Dimensions.get('window').width * 0.8,
       alignSelf: 'center',
     },
@@ -136,6 +137,7 @@ const Activity = ({theme}) => {
       fontWeight: 'bold',
       marginBottom: 10,
       alignSelf: 'flex-start',
+      color: theme.colors.fontColor
     },
     iconContainer: {
       width: 40,

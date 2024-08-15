@@ -34,7 +34,7 @@ const ActionCards = ({theme}) => {
       flex: 1,
       marginHorizontal: 5,
       height: 85,
-      backgroundColor: '#fff',
+      backgroundColor: theme.colors.otherWhite,
     },
     firstIcon: {
       flex: 1,
@@ -60,7 +60,7 @@ const ActionCards = ({theme}) => {
     cardText: {
       textAlign: 'center',
       fontWeight: 'bold',
-      color: '#333',
+      color: theme.colors.fontColor,
       top: -17,
     },
   });

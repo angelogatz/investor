@@ -13,7 +13,7 @@ const user = 'Angelo Gatz';
 const currencyLabel = 'US Dollar';
 const currencyValue = '200.000.000';
 
-const Header = ({ theme }) => {
+const Header = ({ theme, navigation }) => {
   const [isSearchPageVisible, setSearchPageVisible] = useState(false);
 
   const openSearchPage = () => {
@@ -32,7 +32,7 @@ const Header = ({ theme }) => {
       backgroundColor: 'transparent'
     },
     userImage: {
-      borderColor: '#e3f0ff',
+      borderColor: theme.colors.otherWhite,
       border: 2,
       width: 50,
       height: 50,
@@ -43,13 +43,13 @@ const Header = ({ theme }) => {
     userContent: {
       flexDirection: 'row',
       alignItems: 'center',
-      color: theme.colors.secondary,
+      color: theme.colors.fontColor,
     },
     userName: {
       margin: 15,
       fontSize: 25,
       fontFamily: 'Roboto_400Regular',
-      color: theme.colors.secondary,
+      color: theme.colors.fontColor,
       fontWeight: '100',
     },
     currencyLabelContainer: {
@@ -120,7 +120,7 @@ const Header = ({ theme }) => {
     },
     buttonText: {
       fontSize: 18,
-      color: "#fff",
+      color: theme.colors.secondary,
       fontWeight: "bold",
       alignSelf: "center",
       textTransform: "uppercase",
@@ -129,9 +129,13 @@ const Header = ({ theme }) => {
     },
     bell: {
       backgroundColor: 'transparent',
-      left: 25
+      left: 25,
     }
   });
+
+  const handleChangeScreen = () => {
+    navigation.navigate('/profile')
+  }
 
   const currencyLabelMount = (
     <>
@@ -178,12 +182,12 @@ const Header = ({ theme }) => {
   return (
     <View style={headerStyles.container}>
       <View style={headerStyles.userContent}>
-        <View style={headerStyles.userImage}>
+        <TouchableOpacity style={headerStyles.userImage} onPress={() => handleChangeScreen()}>
           <Avatar.Image
             size={45}
             source={require('../../../../assets/images/shane-stagner-z0u91lkc_Bw-unsplash.jpg')}
           />
-        </View>
+        </TouchableOpacity>
         <View style={headerStyles.searchBarContainer}>
           <Searchbar
             icon={() => icon}
@@ -204,6 +208,7 @@ const Header = ({ theme }) => {
             size={40}
             icon='bell'
             style={headerStyles.bell}
+            color={theme.colors.secondary}
           />
         </TouchableOpacity>
       </View>

@@ -43,7 +43,7 @@ const BottomItem = ({id, name, value, theme, url, onChange}) => {
       backgroundColor: 'transparent',
       border: 'none',
       shadowColor: 'transparent',
-      top: active ? 15 : 0,
+      top: active ? 25 : 0,
     },
     dot: {
       fontSize: 45,

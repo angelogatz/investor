@@ -14,11 +14,11 @@ const BottomSheet = ({ theme }) => {
 
   const navigation = useNavigation();
 
-  const [screen, setScreen] = useState('/home');
+  const [screen, setScreen] = useState('/profile');
 
   const bottomSheetStyle = StyleSheet.create({
     container: {
-      backgroundColor: '#fff',
+      backgroundColor: theme.colors.otherWhite,
       width: '90%',
       height: 60,
       justifyContent: 'space-around',
@@ -32,6 +32,16 @@ const BottomSheet = ({ theme }) => {
     cardsContainer: {
       width: 30,
     },
+
+    // primary: '#ffffff',
+    // secondary: '#2f313f',
+    // tertiary: '#000000',
+    // otherWhite: '#30363d'
+
+    // primary: '#312eff',
+    // secondary: '#e3f0ff',
+    // tertiary: '#000000',
+    // otherWhite: '#f0f6fd'
   });
 
   function screenSelection(url) {

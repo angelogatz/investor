@@ -3,8 +3,12 @@ import App from './App';
 import {name as appName} from './app.json';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { darkTheme, lightTheme } from './src/Utils/themeConfig';
+import { useState } from 'react';
 
 export default function Main() {
+
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const bkg = StyleSheet.create({
     backgroundImage: {
@@ -20,9 +24,13 @@ export default function Main() {
           source={require('./src/assets/images/backgroudStandard.jpg')}
           style={bkg.backgroundImage}
           >
-          <SafeAreaView  style={{ flex: 1, backgroundColor: '#312effd9'}}>
+          <SafeAreaView  style={{ flex: 1, backgroundColor: isDarkTheme ? '#a5a5a5a2' : '#312effd9'}}>
             <StatusBar translucent backgroundColor="transparent" />
-            <App theme={DefaultTheme} />
+            <App 
+              theme={isDarkTheme ? darkTheme : lightTheme} 
+              setIsDarkTheme={setIsDarkTheme} 
+              isDarkTheme={isDarkTheme} 
+            />
           </SafeAreaView>
         </ImageBackground>
       </PaperProvider>
